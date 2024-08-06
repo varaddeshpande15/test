@@ -29,7 +29,10 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
-        #content {
+        #main-content {
+            display: block;
+        }
+        #blocked-content {
             display: none;
         }
     </style>
@@ -39,7 +42,7 @@
 <div class="overlay"></div>
 
 <div class="popup-form" id="popupForm">
-    <h2>Fill this form to access the courses</h2>
+    <h2>Fill this form to continue viewing the page</h2>
     <form id="accessForm">
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
@@ -49,7 +52,13 @@
     </form>
 </div>
 
-<div id="content">
+<div id="main-content">
+    <!-- Content visible initially -->
+    <h2>Initial Content</h2>
+    <p>This is the content visible before the popup appears. You will need to fill out the form to continue viewing the page.</p>
+</div>
+
+<div id="blocked-content">
     <!-- Your courses content here -->
     <h2>Course Content</h2>
     <p>Here is the course content that will be shown after the form is submitted.</p>
@@ -60,13 +69,14 @@
         setTimeout(function() {
             document.querySelector('.overlay').style.display = 'block';
             document.getElementById('popupForm').style.display = 'block';
+            document.getElementById('main-content').style.display = 'none';
         }, 10000); // 10 seconds
 
         document.getElementById('accessForm').addEventListener('submit', function(e) {
             e.preventDefault();
             document.querySelector('.overlay').style.display = 'none';
             document.getElementById('popupForm').style.display = 'none';
-            document.getElementById('content').style.display = 'block';
+            document.getElementById('blocked-content').style.display = 'block';
         });
     });
 </script>
